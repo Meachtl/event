@@ -26,11 +26,12 @@ namespace NumberGenerator.Logic
 
         #region Fields
         private Random _rnd;
+        public event EventHandler<int> NumberChanged;
         #endregion
 
         #region Properties
-        public delegate void NumberChangedHandler(int number);
-        public NumberChangedHandler NumberChanged { get; set; }
+        //public delegate void NumberChangedHandler(int number);
+        //public NumberChangedHandler NumberChanged { get; set; }
         public int Delay { get; }
         public int Seed { get; }
         //public int RandomNumber { get; private set; }
@@ -160,8 +161,11 @@ namespace NumberGenerator.Logic
 
             while (NumberChanged != null)
             {
-                NumberChanged(_rnd.Next(RANDOM_MIN_VALUE, RANDOM_MAX_VALUE));
-                Console.WriteLine("New number generated!");
+                int number = _rnd.Next(RANDOM_MIN_VALUE, RANDOM_MAX_VALUE);
+                //NumberChanged(_rnd.Next(RANDOM_MIN_VALUE, RANDOM_MAX_VALUE));
+                //Console.WriteLine("New number generated!");
+                Console.WriteLine($"{this.GetType().Name}: Number generated: '{number}'");
+                NumberChanged(this, number);
                 Thread.Sleep(Delay);
                 //NotifyObservers(RandomNumber);
             }

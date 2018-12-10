@@ -56,7 +56,7 @@ namespace NumberGenerator.Logic
             return string.Format($">> RangeObserver: Number is in range ('{LowerRange}'-'{UpperRange}')!");
         }
 
-        public override void OnNextNumber(int number)
+        public override void OnNextNumber(object sender, int number)
         {
             //if (number >= LowerRange && number <= UpperRange)
             if (LowerRange <= number && number <= UpperRange)
@@ -69,7 +69,7 @@ namespace NumberGenerator.Logic
             {
                 DetachFromNumberGenerator();
             }
-            base.OnNextNumber(number);
+            base.OnNextNumber(this, number);
         }
 
         #endregion

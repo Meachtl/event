@@ -37,14 +37,14 @@ namespace NumberGenerator.Logic
 
             // Beim NumberGenerator als Beobachter registrieren
             //_numberGenerator.Attach(this);
-            _numberGenerator.NumberChanged += new RandomNumberGenerator.NumberChangedHandler(OnNextNumber);
+            _numberGenerator.NumberChanged += OnNextNumber;
         }
 
         #endregion
 
         #region Methods
 
-        public void OnNextNumber(int number)
+        public void OnNextNumber(object sender, int number)
         {
             CountOfNumbersReceived++;
 
@@ -71,7 +71,7 @@ namespace NumberGenerator.Logic
 
         private void DetachFromNumberGenerator()
         {
-            _numberGenerator.NumberChanged -= new RandomNumberGenerator.NumberChangedHandler(OnNextNumber);
+            _numberGenerator.NumberChanged -= OnNextNumber;
         }
 
         #endregion
